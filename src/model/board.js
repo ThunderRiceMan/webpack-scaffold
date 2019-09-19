@@ -1,3 +1,6 @@
+import King from "./king";
+import Piece from "./piece";
+
 export default class Board {
 
   constructor() {
@@ -16,6 +19,17 @@ export default class Board {
     return this._board.length;
   }
 
+  getSelectedCell(){
+    return this._selectedCell;
+  }
+
+  setSelectedCell(i, j) {
+    this._selectedCell = {
+      i: i,
+      j: j
+    };
+  }
+
   _populateBoard(board) {
     this._populateSpecialPieces(board, 0, "w");
     this._populatePawns(board, 1, "w");
@@ -24,19 +38,19 @@ export default class Board {
   }
 
   _populateSpecialPieces(board, row, colour) {
-    board[row][0] = colour + "rook";
-    board[row][1] = colour + "knight";
-    board[row][2] = colour + "bishop";
-    board[row][3] = colour + "queen";
-    board[row][4] = colour + "king";
-    board[row][5] = colour + "bishop";
-    board[row][6] = colour + "knight";
-    board[row][7] = colour + "rook";
+    board[row][0] = new Piece("rook", colour);
+    board[row][1] = new Piece("knight", colour);
+    board[row][2] = new Piece("bishop", colour);
+    board[row][3] = new Piece("queen", colour);
+    board[row][4] = new King(colour);
+    board[row][5] = new Piece("bishop", colour);
+    board[row][6] = new Piece("knight", colour);
+    board[row][7] = new Piece("rook", colour);
   }
 
   _populatePawns(board, row, colour) {
     for (let i = 0; i < 8; i++) {
-      board[row][i] = colour + "pawn";
+      board[row][i] = new Piece("pawn", colour);
     }
   }
 }

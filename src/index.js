@@ -1,11 +1,13 @@
 import Board from "./model/board";
 import BoardRenderer from "./renderers/boardRenderer";
+import BoardController from "./controller/boardController";
 
-var container = document.createElement("div");
+let container = document.createElement("div");
 container.className = "container";
 document.body.appendChild(container);
 
-var board = new Board();
-var boardRenderer = new BoardRenderer();
+let board = new Board();
+let boardController = new BoardController(board);
+let boardRenderer = new BoardRenderer(boardController);
 
 boardRenderer.render(container, board);
