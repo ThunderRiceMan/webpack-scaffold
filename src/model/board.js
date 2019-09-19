@@ -7,6 +7,14 @@ export default class Board {
         }
         this._populateBoard(this._board);
     }
+  
+    getCell(i, j) {
+        return this._board[i][j];
+    }
+
+    getSize() {
+        return this._board.length;
+    }
 
     _populateBoard(board) {
         this._populateSpecialPieces(board, 0, "w");
