@@ -6,32 +6,38 @@ export default class BoardRenderer {
 
   render(container, board) {
     let size = board.getSize();
-    let cellArray = [];
+    let cellElements = [];
 
     for (let i = 0; i < size; i++) {
       let row = document.createElement("div");
       row.className = "row";
       container.appendChild(row);
-      cellArray.push([]);
+      cellElements.push([]);
       for (let j = 0; j < size; j++) {
-        let cell = document.createElement("div");
-        cell.className = "cell";
-        cell.innerText = "";
-        cellArray[i][j] = cell;
+        let cellElement = document.createElement("div");
+        cellElement.className = "cell";
+        cellElements[i][j] = cellElement;
         if (board.getCell(i, j) !== undefined) {
-          cell.innerText = board.getCell(i, j).getDisplayName();
+          cellElement.innerText = board.getCell(i, j).getDisplayName();
 
-          cell.addEventListener("click", function () {
+          cellElement.addEventListener("click", function () {
             for (let i = 0; i < size; i++) {
               for (let j = 0; j < size; j++) {
-                cellArray[i][j].className = "cell";
+                cellElements[i][j].className = "cell";
               }
             }
-            cell.className = "cell selected";
+            cellElement.className = "cell selected";
+            let moves = board.getCell(i, j).getPossibleMoves(i, j);
+            for (let i = 0; i < moves.length; i++) {
+              let move = moves[i];
+              if (move[0] >= 0 && move[1] >= 0 && move[0] < 8 && move[1] <8) {
+                cellElements[move[0]][move[1]].className = "cell possible";
+              }
+            }
           });
 
         }
-        row.appendChild(cell);
+        row.appendChild(cellElement);
       }
 
     }

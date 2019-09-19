@@ -1,8 +1,9 @@
 @import "reset";
 @import "colours";
 
-.container, .row {
-    white-space: nowrap;
+.row {
+    display: flex;
+    flex-direction: row;    
 }
 
 .cell {
@@ -12,6 +13,10 @@
     height: 70px;
 }
 
-.selected{
+.selected {
     background-color: gray;
+}
+
+.possible {
+    background-color: green;
 }
