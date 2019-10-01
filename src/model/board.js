@@ -1,5 +1,9 @@
 import King from "./king";
-import Piece from "./piece";
+import Rook from "./rook";
+import Bishop from "./bishop";
+import Knight from "./knight";
+import Queen from "./queen";
+import Pawn from "./pawn";
 
 export default class Board {
 
@@ -38,19 +42,19 @@ export default class Board {
   }
 
   _populateSpecialPieces(board, row, colour) {
-    board[row][0] = new Piece("rook", colour);
-    board[row][1] = new Piece("knight", colour);
-    board[row][2] = new Piece("bishop", colour);
-    board[row][3] = new Piece("queen", colour);
+    board[row][0] = new Rook(colour);
+    board[row][1] = new Knight(colour);
+    board[row][2] = new Bishop(colour);
+    board[row][3] = new Queen(colour);
     board[row][4] = new King(colour);
-    board[row][5] = new Piece("bishop", colour);
-    board[row][6] = new Piece("knight", colour);
-    board[row][7] = new Piece("rook", colour);
+    board[row][5] = new Bishop(colour);
+    board[row][6] = new Knight(colour);
+    board[row][7] = new Rook(colour);
   }
 
   _populatePawns(board, row, colour) {
     for (let i = 0; i < 8; i++) {
-      board[row][i] = new Piece("pawn", colour);
+      board[row][i] = new Pawn(colour);
     }
   }
 }
