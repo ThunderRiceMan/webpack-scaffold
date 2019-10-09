@@ -18,7 +18,10 @@ export default class Board extends EventEmitter {
   }
   
   getPiece(i, j) {
-    return this._board[i][j];
+    if (this._board[i]) {
+      return this._board[i][j];
+    }
+    return undefined;
   }
 
   getSize() {
