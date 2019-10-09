@@ -1,8 +1,8 @@
 const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpackConfig = require("./webpack.common.config.js");
+const webpackCommonConfig = require("./webpack.common.config.js");
 
-module.exports = merge(webpackConfig, {
+module.exports = merge(webpackCommonConfig, {
   mode: "development",
   entry: ["./styles/main.scss", "./src/index.js"],
   plugins: [
@@ -10,6 +10,13 @@ module.exports = merge(webpackConfig, {
   ],
   module: {
     rules: [
+      {
+        test: /\.(tj)s$/,
+        loader: "ts-loader",
+        options: {
+          configFile: "tsconfig.viewer.json"
+        }
+      },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]

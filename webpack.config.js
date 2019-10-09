@@ -1,8 +1,8 @@
 const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpackConfig = require("./webpack.common.config.js");
+const webpackCommonConfig = require("./webpack.common.config.js");
 
-module.exports = merge(webpackConfig, {
+module.exports = merge(webpackCommonConfig, {
   mode: "production",
   entry: {
     "main": ["./styles/main.scss", "./src/index.js"],
@@ -14,22 +14,27 @@ module.exports = merge(webpackConfig, {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(tj)s$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  "useBuiltIns": "entry",
-                  "corejs": "2.6.9"
-                }
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    "useBuiltIns": "entry",
+                    "corejs": "2.6.9"
+                  }
+                ]
               ]
-            ]
+            }
+          },
+          {
+            loader: "ts-loader"
           }
-        }
+        ]
       },
       {
         test: /\.scss$/,

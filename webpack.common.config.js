@@ -10,5 +10,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ filename: "index.html" }),
-  ]
+  ],
+  resolve: {
+    extensions: [".ts", ".js"]
+  }
 };
