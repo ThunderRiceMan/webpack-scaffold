@@ -1,3 +1,4 @@
+import EventEmitter from "eventemitter3";
 import King from "./king";
 import Rook from "./rook";
 import Bishop from "./bishop";
@@ -5,9 +6,10 @@ import Knight from "./knight";
 import Queen from "./queen";
 import Pawn from "./pawn";
 
-export default class Board {
+export default class Board extends EventEmitter {
 
   constructor() {
+    super();
     this._board = [];
     for (let i = 0; i < 8; i++) {
       this._board[i] = [];
@@ -15,7 +17,7 @@ export default class Board {
     this._populateBoard(this._board);
   }
   
-  getCell(i, j) {
+  getPiece(i, j) {
     return this._board[i][j];
   }
 
@@ -23,15 +25,12 @@ export default class Board {
     return this._board.length;
   }
 
-  getSelectedCell(){
-    return this._selectedCell;
+  setSelectedCell(piece) {
+    this.emit("selected cell", piece);
   }
 
-  setSelectedCell(i, j) {
-    this._selectedCell = {
-      i: i,
-      j: j
-    };
+  setValidMoves(possibleMoves) {
+    this.emit("valid moves changed", possibleMoves);
   }
 
   _populateBoard(board) {
